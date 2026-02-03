@@ -1,0 +1,4 @@
+# For ilustration purposes, not actually used
+bucket = "terraform-course-troybrown-remote-backend"
+key    = "04-backend/prod/state.tfstate"
+region = "us-east-1"
