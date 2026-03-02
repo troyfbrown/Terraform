@@ -13,9 +13,38 @@ data "aws_ami" "ubuntu" {
   }
 }
 
+data "aws_caller_identity" "current" {}
+
+data "aws_region" "current" {}
+
+data "aws_vpc" "prod_vpc" {
+  tags = {
+    Env = "Prod"
+  }
+}
+
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
+output "azs" {
+  value = data.aws_availability_zones.available
+}
+
+output "prod_vpc_id" {
+  value = data.aws_vpc.prod_vpc.id
+}
 
 output "ubuntu_ami_data_us" {
   value = data.aws_ami.ubuntu
+}
+
+output "aws_caller_identity" {
+  value = data.aws_caller_identity.current
+}
+
+output "aws_region" {
+  value = data.aws_region.current
 }
 
 resource "aws_instance" "web" {
