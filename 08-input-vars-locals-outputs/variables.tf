@@ -1,6 +1,5 @@
 variable "ec2_instance_type" {
   type        = string
-  default     = "t3.micro"
   description = "The type of the managed EC2 instances."
 
   validation {

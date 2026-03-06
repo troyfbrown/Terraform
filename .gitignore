@@ -4,4 +4,3 @@ LICENSE.txt
 .terraform.lock.hcl
 *.tfstate
 *.tfstate.backup
-*.tfvars
