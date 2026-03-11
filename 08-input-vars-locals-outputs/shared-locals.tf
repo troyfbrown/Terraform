@@ -11,5 +11,6 @@ locals {
     project_owner = local.project_owner
     cost_center   = local.cost_center
     managed_by    = local.managed_by
+    sensitive_tag = var.my_sensitive_value
   }
 }
