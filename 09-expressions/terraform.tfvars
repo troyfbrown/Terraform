@@ -22,3 +22,24 @@ objects_list = [
     lastname  = "Brown"
   }
 ]
+
+users = [
+  {
+    role     = "admin"
+    username = "john"
+  },
+  {
+    role     = "developer"
+    username = "jane"
+  },
+  {
+    role     = "auditor"
+    username = "jane"
+  },
+  {
+    role     = "auditor"
+    username = "troy"
+  }
+]
+
+user_to_output = "jane"
