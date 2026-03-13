@@ -1,12 +1,8 @@
-locals {
-  project = "11-multiple-resources"
-}
-
 resource "aws_vpc" "main" {
   cidr_block = "10.0.0.0/16"
 
   tags = {
-    Project = "11-multiple-resources"
+    Project = local.project
     Name    = local.project
   }
 }
@@ -17,7 +13,7 @@ resource "aws_subnet" "main" {
   cidr_block = "10.0.${count.index}.0/24"
 
   tags = {
-    Project = "11-multiple-resources"
+    Project = local.project
     Name    = "${local.project}-${count.index}"
   }
 }
