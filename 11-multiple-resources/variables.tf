@@ -30,3 +30,11 @@ variable "ec2_instance_config_list" {
     error_message = "At least one of the provided \"ami\" values is not supported. \nSupported \"ami\" values: \"ubuntu\", \"nginx\"."
   }
 }
+
+variable "ec2_instance_config_map" {
+  type = map(object({
+    instance_type = string
+    ami           = string
+    subnet_index  = optional(number)
+  }))
+}
