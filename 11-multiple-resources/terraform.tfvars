@@ -7,6 +7,6 @@ ec2_instance_config_list = [
   },
   {
     instance_type = "t3.micro",
-    ami           = "ubuntu"
+    ami           = "nginx"
   }
 ]
