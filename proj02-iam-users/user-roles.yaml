@@ -10,5 +10,5 @@ users:
   roles: [readonly, developer]
 - username: jane
   roles: [admin, auditor]
-- username: Troy
+- username: Lauro
   roles: [readonly]
