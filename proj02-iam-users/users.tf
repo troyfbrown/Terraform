@@ -1,5 +1,8 @@
 locals {
   users_from_yaml = yamldecode(file("${path.module}/user-roles.yaml")).users
+  users_map = {
+    for user_config in local.users_from_yaml : user_config.username => user_config.roles
+  }
 }
 
 resource "aws_iam_user" "users" {

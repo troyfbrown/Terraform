@@ -6,9 +6,9 @@
 # }[]
 
 users:
-- username: John
-  roles: [readonly, developer]
-- username: jane
-  roles: [admin, auditor]
-- username: Lauro
-  roles: [readonly]
+  - username: John
+    roles: [readonly, developer]
+  - username: jane
+    roles: [admin, auditor]
+  - username: Lauro
+    roles: [readonly]
