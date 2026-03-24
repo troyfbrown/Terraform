@@ -24,6 +24,7 @@ resource "aws_iam_user_login_profile" "users" {
   }
 }
 
+# Would not be instituted in a professional project, just installed for personal ease
 output "passwords" {
   sensitive = true
   value = {

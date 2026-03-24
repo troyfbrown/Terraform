@@ -15,7 +15,22 @@ locals {
       "AmazonRDSFullAccess"
     ]
   }
-
+/*
+[
+  {
+  role = "developer"
+  policy = "AmazonVPCFullAccess"
+  },
+  {
+  role = "developer"
+  policy = "AmazonEC2FullAccess"
+  },
+  {
+  role = "developer"
+  policy = "AmazonRDSFullAccess"
+  }
+]
+*/
   role_policies_list = flatten([
     for role, policies in local.role_policies : [
       for policy in policies : {
