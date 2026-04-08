@@ -8,11 +8,6 @@ resource "aws_s3_bucket" "remote_state" {
 
   tags = {
     ManagedBy = "Terraform"
-    lifecycle = "Critical"
-  }
-
-  lifecycle {
-    prevent_destroy = true
   }
 }
 
