@@ -18,9 +18,10 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "this" {
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = var.instance_type
-  subnet_id     = aws_subnet.this.id
+  ami               = data.aws_ami.ubuntu.id
+  instance_type     = var.instance_type
+  availability_zone = "us-east-1a"
+  subnet_id         = aws_subnet.this[0].id
 
 
   root_block_device {
@@ -29,11 +30,22 @@ resource "aws_instance" "this" {
     volume_type           = "gp3"
   }
 
+  tags = {
+    CostCenter = "1234"
+  }
+
   lifecycle {
     create_before_destroy = true
     postcondition {
       condition     = contains(local.allowed_instance_types, self.instance_type)
       error_message = "Self invalid instance type"
     }
+  }
+}
+
+check "cost_center_check" {
+  assert {
+    condition     = can(aws_instance.this.tags.CostCenter != "")
+    error_message = "Your AWS Instance does not have a CostCenter tag."
   }
 }

@@ -5,7 +5,7 @@ module "vpc" {
     cidr_block = "10.0.0.0/16"
     name       = "13-local-modules"
   }
-  
+
   subnet_config = {
     subnet_1 = {
       cidr_block = "10.0.0.0/24"
