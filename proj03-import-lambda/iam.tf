@@ -33,7 +33,7 @@ data "aws_iam_policy_document" "lambda_execution" {
 
   statement {
     effect    = "Allow"
-    resources = ["arn:aws:logs:us-east-1:629066559449:log-group:/aws/lambda/manually-created-lambda:*"]
+    resources = ["${aws_cloudwatch_log_group.lambda.arn}:*"]
     actions = [
       "logs:CreateLogStream",
       "logs:PutLogEvents"

@@ -24,6 +24,6 @@ resource "aws_lambda_function" "this" {
 
   logging_config {
     log_format = "Text"
-    log_group  = "/aws/lambda/manually-created-lambda"
+    log_group  = aws_cloudwatch_log_group.lambda.name
   }
 }
