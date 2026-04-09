@@ -14,7 +14,7 @@ resource "aws_lambda_function" "this" {
   filename         = "lambda.zip"
   function_name    = "manually-created-lambda"
   handler          = "index.handler"
-  role             = "arn:aws:iam::629066559449:role/service-role/manually-created-lambda-role-uibb7hau"
+  role             = aws_iam_role.lambda_execution_role.arn
   runtime          = "nodejs22.x"
   source_code_hash = data.archive_file.lambda_code.output_base64sha256
 
