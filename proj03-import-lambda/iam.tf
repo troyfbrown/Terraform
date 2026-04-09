@@ -8,6 +8,9 @@ import {
   id = "arn:aws:iam::629066559449:policy/service-role/AWSLambdaBasicExecutionRole-f727636a-5080-4530-89fe-9b08860f634b"
 }
 
+data "aws_caller_identity" "current" {}
+data "aws_region" "current" {}
+
 data "aws_iam_policy_document" "assume_lambda_execution_role" {
   statement {
     effect = "Allow"
@@ -21,21 +24,27 @@ data "aws_iam_policy_document" "assume_lambda_execution_role" {
   }
 }
 
+data "aws_iam_policy_document" "lambda_execution" {
+  statement {
+    effect    = "Allow"
+    resources = ["arn:aws:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:*"]
+    actions   = ["logs:CreateLogGroup"]
+  }
+
+  statement {
+    effect    = "Allow"
+    resources = ["arn:aws:logs:us-east-1:629066559449:log-group:/aws/lambda/manually-created-lambda:*"]
+    actions = [
+      "logs:CreateLogStream",
+      "logs:PutLogEvents"
+    ]
+  }
+}
+
 resource "aws_iam_policy" "lambda_execution" {
-  name = "AWSLambdaBasicExecutionRole-f727636a-5080-4530-89fe-9b08860f634b"
-  path = "/service-role/"
-  policy = jsonencode({
-    Statement = [{
-      Action   = "logs:CreateLogGroup"
-      Effect   = "Allow"
-      Resource = "arn:aws:logs:us-east-1:629066559449:*"
-      }, {
-      Action   = ["logs:CreateLogStream", "logs:PutLogEvents"]
-      Effect   = "Allow"
-      Resource = ["arn:aws:logs:us-east-1:629066559449:log-group:/aws/lambda/manually-created-lambda:*"]
-    }]
-    Version = "2012-10-17"
-  })
+  name   = "AWSLambdaBasicExecutionRole-f727636a-5080-4530-89fe-9b08860f634b"
+  path   = "/service-role/"
+  policy = data.aws_iam_policy_document.lambda_execution.json
 }
 
 resource "aws_iam_role" "lambda_execution_role" {
